@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Strive Quiz</title>
+  </head>
+  <body>
+    <div class="jumbotron col-md-12">
+        <h5>Question: {{current_question}}/{{total_questions}}</h5>
+        <p id="demo"></p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: {{progress}}%" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        <div class="card-body">
+            <h1 class="card-title text-center">{{question}}</h1>
+            <div class="form-group">
+                <form action="/{{question_id}}/" method="post">{% csrf_token %}
+                    <div class="col text-center">
+                        <label for="answer  ">Your Answer</label>
+                        <textarea name="answer" id="answer" class="form-control lg-4" value = "2"></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+
+            
+        </div>
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date().getTime();
+        
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+        
+          // Get today's date and time
+          var now = new Date().getTime();
+        
+          // Find the distance between now and the count down date
+          var distance =  countDownDate + 180000 - now;
+          // Time calculations for days, hours, minutes and seconds
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.round((distance % (1000 * 60)) / 1000);
+        
+          // Display the result in the element with id="demo"
+          document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+        
+          // If the count down is finished, write some text
+          if (distance < 0) {
+            clearInterval(x);
+            window.location.href = "/{{question_id}}";
+          }
+        }, 1000);
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
